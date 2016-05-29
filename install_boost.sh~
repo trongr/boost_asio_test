@@ -1,9 +1,0 @@
-#!/bin/bash
-
-# download boost from http://downloads.sourceforge.net/project/boost/boost/1.61.0/boost_1_61_0.tar.bz2
-tar xfv boost_1_61_0.tar.bz2
-cd boost_1_61_0.tar
-
-# only build boost system and regex (required by asio) to save build time
-./bootstrap.sh --prefix=/usr/local/ --with-libraries=system,regex
-sudo ./b2 --prefix=/usr/local/ --with-system --with-regex threading=multi install

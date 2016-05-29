@@ -1,18 +1,15 @@
 CC = g++
-CFLAGS = -g -Wall
-INCLUDES = -I/Users/admin/boost_1_61_0
-LFLAGS = -L/Users/admin/boost_1_61_0/stage/lib
+CFLAGS = -g -Wall -std=c++11
+INCLUDES = -I$(HOME)/
+LFLAGS = -L$(HOME)/lib
 LIBS = -lboost_system -lboost_thread
 MAIN = main
 DEPS =
 SRCS = $(wildcard src/*.cpp)
 OBJS = $(patsubst src/%.cpp,obj/%.o,$(SRCS))
-POST = install_name_tool -change libboost_system.dylib \
-	~/boost_1_61_0/stage/lib/libboost_system.dylib $(MAIN)
 
 $(MAIN): build $(OBJS) $(DEPS)
 	$(CC) -o $@ $(OBJS) $(CFLAGS) $(INCLUDES) $(LFLAGS) $(LIBS)
-	$(POST)
 
 obj/%.o: src/%.cpp
 	$(CC) -c -o $@ $< $(CFLAGS) $(INCLUDES)
